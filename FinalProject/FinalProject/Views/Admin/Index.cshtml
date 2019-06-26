@@ -1,0 +1,203 @@
+﻿
+
+
+
+
+
+
+@Html.Partial("_AdminIndexPartial")
+
+
+
+
+
+@*@{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+    <div>
+        @Html.ActionLink("Create", "Create", "Admin")
+    </div>
+
+
+    <style>
+        .userTypes div {
+            display: inline-block;
+        }
+
+        table {
+            width: 100%;
+        }
+    </style>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#activeUsers").click(function () {
+                $.ajax({
+                    type: "Get",
+                    dataType: "json",
+                    url: '@Url.Action("Users", "Admin")',
+                    success: function (result) {
+                        //var r = "";
+                        var name = "";
+                        var surname = "";
+                        var email = "";
+                        var phone = "";
+                        $.each(result, function (index, value) {
+                            if (value.IsActive == true && value.IsAdmin == false) {
+                                //r += value.Name + " " + value.Surname + '</br>';
+                                name += '<p>' + value.Name + '</p>';
+                                surname += '<p>' + value.Surname + '</p>';
+                                email += '<p>' + value.Email + '</p>';
+                                phone += '<p>' + value.PhoneNumber + '</p>';
+                            }
+
+                        });
+
+                        //$('#activeUsersResult').html(r);
+                        $('#Name').html(name);
+                        $('#Surname').html(surname);
+                        $('#Email').html(email);
+                        $('#Phone').html(phone);
+                    }
+                });
+            });
+        });
+
+
+         $(document).ready(function () {
+             $("#deletedUsers").click(function () {
+                $.ajax({
+                    type: "Get",
+                    dataType: "json",
+                    url: '@Url.Action("Users", "Admin")',
+                    success: function (result) {
+                        //var r = "";
+                        var name = "";
+                        var surname = "";
+                        var email = "";
+                        var phone = "";
+                        $.each(result, function (index, value) {
+                            if (value.IsActive == false && value.IsAdmin == false) {
+                                //r += value.Name + " " + value.Surname + '</br>';
+                                name += '<p>' + value.Name + '</p>';
+                                surname += '<p>' + value.Surname + '</p>';
+                                email += '<p>' + value.Email + '</p>';
+                                phone += '<p>' + value.PhoneNumber + '</p>';
+                            }
+
+                        });
+
+                        //$('#deletedUsersResult').html(r);
+                        $('#Name').html(name);
+                        $('#Surname').html(surname);
+                        $('#Email').html(email);
+                        $('#Phone').html(phone);
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $("#activeAdmins").click(function () {
+                $.ajax({
+                    type: "Get",
+                    dataType: "json",
+                    url: '@Url.Action("Users", "Admin")',
+                    success: function (result) {
+                        //var r = "";
+                        var name = "";
+                        var surname = "";
+                        var email = "";
+                        var phone = "";
+                        $.each(result, function (index, value) {
+                            if (value.IsActive == true && value.IsAdmin == true) {
+                                //r += value.Name + " " + value.Surname + '</br>';
+                                name += '<p>' + value.Name + '</p>';
+                                surname += '<p>' + value.Surname + '</p>';
+                                email += '<p>' + value.Email + '</p>';
+                                phone += '<p>' + value.PhoneNumber + '</p>';
+                            }
+
+                        });
+
+                        //$('#deletedUsersResult').html(r);
+                        $('#Name').html(name);
+                        $('#Surname').html(surname);
+                        $('#Email').html(email);
+                        $('#Phone').html(phone);
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $("#deletedAdmins").click(function () {
+                $.ajax({
+                    type: "Get",
+                    dataType: "json",
+                    url: '@Url.Action("Users", "Admin")',
+                    success: function (result) {
+                        //var r = "";
+                        var name = "";
+                        var surname = "";
+                        var email = "";
+                        var phone = "";
+                        $.each(result, function (index, value) {
+                            if (value.IsActive == false && value.IsAdmin == true) {
+                                //r += value.Name + " " + value.Surname + '</br>';
+                                name += '<p>' + value.Name + '</p>';
+                                surname += '<p>' + value.Surname + '</p>';
+                                email += '<p>' + value.Email + '</p>';
+                                phone += '<p>' + value.PhoneNumber + '</p>';
+                            }
+
+                        });
+
+                        //$('#deletedUsersResult').html(r);
+                        $('#Name').html(name);
+                        $('#Surname').html(surname);
+                        $('#Email').html(email);
+                        $('#Phone').html(phone);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <div class="userTypes">
+        <div class="active-sers">
+            <a href="#" id="activeUsers">Active Users</a>
+        </div>
+
+        <div class="deleted-users">
+            <a href="#" id="deletedUsers">Deleted Users</a>
+        </div>
+
+        <div class="active-admins">
+            <a href="#" id="activeAdmins">Active Admins</a>
+        </div>
+
+        <div class="deleted-admins">
+            <a href="#" id="deletedAdmins">Deleted Admins</a>
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <th>სახელი</th>
+            <th>გვარი</th>
+            <th>მეილი</th>
+            <th>ტელეფონი</th>
+        </tr>
+        <tr>
+            <td id="Name"></td>
+            <td id="Surname"></td>
+            <td id="Email"></td>
+            <td id="Phone"></td>
+
+        </tr>
+    </table>*@

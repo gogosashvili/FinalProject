@@ -1,0 +1,130 @@
+﻿@using FinalProject.Models
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<FinalProject.Models.Book>
+
+@{
+    ViewBag.Title = "BookList";
+}
+
+
+@Html.Partial("_AdminIndexPartial")
+
+
+<h2>BookList</h2>
+
+<form action="/Admin/BookList" method="get">
+    <input class="form-control" type="search" name="Name" placeholder="სახელი" value="@ViewBag.Name" id="book-name" style="width:400px;float:left;" />
+    <input type="submit" class="btn btn-default" value="ძებნა" />
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "CreateBook")
+</p>
+
+
+<div id="NameColId">
+    <table class="table">
+        <tr>
+            <th>
+                @Ajax.ActionLink("სახელი", "SortByBookName", new { sortByName = ViewBag.SortByName, searchName = ViewBag.Name }, new AjaxOptions()
+           {
+               HttpMethod = "Get",
+               UpdateTargetId = "NameColId",
+               InsertionMode = InsertionMode.Replace
+           })
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.FirstOrDefault().AuthorId)*@
+                ავტორი
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FirstOrDefault().DealTypeId)*@
+                გარიგების ტიპი
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FirstOrDefault().GenreId)*@
+                ჟანრი
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FirstOrDefault().ConditionId)*@
+                წიგნის მდგომარეობა
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FirstOrDefault().IsActive)*@
+                აქტიური
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().UserId)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookAuthor.Name)
+                    @Html.DisplayFor(modelItem => item.BookAuthor.Surname)
+                    (@Html.DisplayFor(modelItem => item.BookAuthor.Pseudonym))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DealType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookGenre.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookCondition.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "EditBook", new { bookId = item.BookId }) |
+                    @*@Html.ActionLink("Details", "Details", new { bookId=item.BookId }) |*@
+
+                    @if (item.IsActive == 0)
+                    {
+                        <span>Deleted</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Delete", "DeleteBook", new { bookId = item.BookId })
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>
+
+
+@Html.PagedListPager(
+Model,
+page => Url.Action("BookList", new { fromPage = true,sortByName = ViewBag.SortByName, page = page }),
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "NameColId" })
+)
+
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('#book-name').autocomplete({
+                source: '@Url.Action("GetBookByName")'
+            })
+        })
+    });
+</script>

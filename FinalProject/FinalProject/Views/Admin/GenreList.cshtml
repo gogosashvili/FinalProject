@@ -1,0 +1,60 @@
+﻿@using FinalProject.Models
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<FinalProject.Models.BookGenre>
+
+
+@{
+    ViewBag.Title = "GenreList";
+}
+
+
+@Html.Partial("_AdminIndexPartial")
+
+
+<h2>GenreList</h2>
+
+<form action="/Admin/GenreList" method="get">
+    <input class="form-control" type="search" name="Name" placeholder="სახელი" value="@ViewBag.Name" style="width:400px;float:left;" />
+    <input type="submit" class="btn btn-default" value="ძებნა" />
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "CreateGenre")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().GenreId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.GenreId)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditGenre", new { genreId = item.GenreId }) |
+                @*@Html.ActionLink("Details", "DetailsGenre", new { genreId = item.GenreId }) |*@
+                @Html.ActionLink("Delete", "DeleteGenre", new { genreId = item.GenreId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@Html.PagedListPager(
+Model,
+page => Url.Action("GenreList", new { fromPage = true, page = page }),
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "NameColId" })
+)

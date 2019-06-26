@@ -1,0 +1,82 @@
+﻿@model IEnumerable<FinalProject.Models.User>
+
+@{
+    ViewBag.Title = "AdminList";
+}
+
+@Html.Partial("_AdminIndexPartial")
+
+
+<h2>AdminList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateAdmin")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsAdmin)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditAdmin", new { userId = item.Id }) |
+                @* @Html.ActionLink("Details", "DetailsAdmin", new { userId = item.Id }) |*@
+
+                @if (item.IsActive == 0)
+                {
+                    <span>Deleted</span>
+                }
+                else
+                {
+                    @Html.ActionLink("Delete", "DeleteAdmin", new { userId = item.Id })
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>

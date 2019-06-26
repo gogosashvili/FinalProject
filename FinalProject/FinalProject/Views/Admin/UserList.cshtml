@@ -1,0 +1,115 @@
+﻿@using FinalProject.Models
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<FinalProject.Models.User>
+
+
+@{
+    ViewBag.Title = "UserList";
+}
+
+
+@Html.Partial("_AdminIndexPartial")
+
+
+<h2>UserList</h2>
+
+
+
+<form action="/Admin/UserList" method="get">
+    <input class="form-control" type="search" name="Name" placeholder="სახელი" value="@ViewBag.Name" style="width:400px;float:left;" />
+    <input class="form-control" type="search" name="Surname" placeholder="გვარი" value="@ViewBag.Surname" style="width:400px;float:left;" />
+    <input class="form-control" type="search" name="Mail" placeholder="მეილი" value="@ViewBag.Email" style="width:400px;float:left;" />
+    <input type="submit" class="btn btn-default" value="ძებნა" />
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "CreateUser")
+</p>
+
+<div id="NameColId">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Surname)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+                </th>*@
+
+            <th>
+                @Ajax.ActionLink("მეილი", "SortUserByEmail", new { sortByEmail = ViewBag.SortByEmail, searchEmail = ViewBag.Email }, new AjaxOptions()
+           {
+               HttpMethod = "Get",
+               UpdateTargetId = "NameColId",
+               InsertionMode = InsertionMode.Replace
+           })
+            </th>
+
+            @*<th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Password)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PhoneNumber)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().IsAdmin)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().IsActive)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.IsAdmin)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new { userId = item.Id }) |
+                    @*  @Html.ActionLink("Details", "Details", new { userId = item.Id }) |*@
+
+                    @if (item.IsActive == 0)
+                    {
+                        <span>Deleted</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Delete", "DeleteUser", new { userId = item.Id})
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@Html.PagedListPager(
+Model,
+page => Url.Action("UserList", new { fromPage = true, sortByEmail = ViewBag.SortByEmail, page = page }),
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "NameColId" })
+)

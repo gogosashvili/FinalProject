@@ -1,0 +1,72 @@
+﻿@using FinalProject.Models
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<FinalProject.Models.BookAuthor>
+
+@{
+    ViewBag.Title = "AuthorList";
+}
+
+
+@Html.Partial("_AdminIndexPartial")
+
+
+<h2>AuthorList</h2>
+
+<form action="/Admin/AuthorList" method="get">
+    <input class="form-control" type="search" name="Name" placeholder="სახელი" value="@ViewBag.Name" style="width:400px;float:left;" />
+    <input class="form-control" type="search" name="Surname" placeholder="გვარ" value="@ViewBag.Surname" style="width:400px;float:left;" />
+    <input class="form-control" type="search" name="Pseudonym" placeholder="ფსევდონიმი" value="@ViewBag.Pseudonym" style="width:400px;float:left;" />
+    <input type="submit" class="btn btn-default" value="ძებნა" />
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "CreateAuthor")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().AuthorId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Pseudonym)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.AuthorId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pseudonym)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditAuthor", new { authorId = item.AuthorId }) |
+             @*   @Html.ActionLink("Details", "Details", new { authorId = item.AuthorId }) |*@
+                @Html.ActionLink("Delete", "DeleteAuthor", new { authorId = item.AuthorId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(
+Model,
+page => Url.Action("AuthorList", new { fromPage = true,sortByName = ViewBag.SortByName, page = page }),
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "NameColId" })
+)

@@ -1,0 +1,89 @@
+﻿@model FinalProject.Models.Book
+
+@{
+    ViewBag.Title = "DeleteBook";
+}
+
+<h2>DeleteBook</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           @* @Html.DisplayNameFor(model => model.Name)*@
+            სათაური
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+          @*  @Html.DisplayNameFor(model => model.AuthorId)*@
+          ავტორი
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookAuthor.Name)
+            @Html.DisplayFor(model => model.BookAuthor.Surname)
+            (@Html.DisplayFor(model => model.BookAuthor.Pseudonym))
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.DealTypeId)*@
+            გარიგების ტიპი
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DealType.Name)
+        </dd>
+
+        <dt>
+          @*  @Html.DisplayNameFor(model => model.GenreId)*@
+            ჟანრი
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookGenre.Name)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ConditionId)*@
+            მდგომარეობა
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookCondition.Name)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+            აქტიური
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+            იუზერი
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "BookList")
+        </div>
+    }
+</div>
