@@ -298,7 +298,7 @@ namespace FinalProject.Controllers
                 GenreId = model.GenreId,
                 DealTypeId = model.DealTypeId,
                 IsActive = 1,
-                UserId = 1 /*LoginHelper.CurrentUser().Id*/   //არ მუშაობს :(
+                UserId = LoginHelper.CurrentUser().Id   //არ მუშაობს :(
             });
             return RedirectToAction("BookList");
         }

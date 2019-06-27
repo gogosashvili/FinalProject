@@ -74,11 +74,13 @@ namespace FinalProject.Models
             var pass = user.Password;
             var result = _db.Users.FirstOrDefault(e => e.Email == user.Email && e.Password == pass);
 
-            LoginHelper.CreateUser(new User()
-            {
-                Password = user.Password,
-                Email = user.Email
-            });
+            LoginHelper.CreateUser(result);
+            //LoginHelper.CreateUser(new User()
+            //{
+            //    Id = result.Id,
+            //    Password = user.Password,
+            //    Email = user.Email
+            //});
             return result == null ? false : true;
         }
 

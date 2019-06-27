@@ -1,0 +1,69 @@
+﻿@model IEnumerable<FinalProject.Models.Book>
+
+@{
+    ViewBag.Title = "InActiveBookList";
+}
+
+<h2>InActiveBookList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DealTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConditionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DealTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GenreId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConditionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+         @*   @Html.ActionLink("Edit", "Edit", new { id=item.BookId }) |*@
+            @Html.ActionLink("Details", "BookDetails", new { bookId = item.BookId }) |
+           @* @Html.ActionLink("Delete", "Delete", new { id=item.BookId })*@
+        </td>
+    </tr>
+}
+
+</table>

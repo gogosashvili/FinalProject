@@ -95,8 +95,7 @@ namespace FinalProject.Controllers
                 }
                 else if (result.IsAdmin == 0)
                 {
-                    //იუზერიც ექშენზე რედირექთი არ გამომრჩეს :დ 
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "User");
                 }
                
             }

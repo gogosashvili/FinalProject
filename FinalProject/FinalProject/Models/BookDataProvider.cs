@@ -19,6 +19,11 @@ namespace FinalProject.Models
             return _db.Books.Where(e => e.Name.Contains(bookName));
         }
 
+        public IEnumerable<Book> GetUserBooks(int userId)
+        {
+            return _db.Books.Where(e => e.UserId == userId);
+        }
+
         public void AddBook(Book model)
         {
             _db.Books.Add(model);
