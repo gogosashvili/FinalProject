@@ -15,5 +15,6 @@ namespace FinalProject.Models
         public int ConditionId { get; set; }
         public double IsActive { get; set; }
         public int UserId { get; set; }
+        public Nullable<decimal> Price { get; set; }
     }
 }

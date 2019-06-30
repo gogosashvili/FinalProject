@@ -27,13 +27,8 @@
     <table class="table">
         <tr>
             <th>
-                @Ajax.ActionLink("სახელი", "SortByBookName", new { sortByName = ViewBag.SortByName, searchName = ViewBag.Name }, new AjaxOptions()
-           {
-               HttpMethod = "Get",
-               UpdateTargetId = "NameColId",
-               InsertionMode = InsertionMode.Replace
-           })
-            </th>
+
+                @Html.ActionLink("სახელი", "BookList", new { sortByName = ViewBag.SortByName == null || ViewBag.SortByName == "asc" ? "desc" : "asc", searchName = ViewBag.Name, page = 1})
             @*<th>
                     @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
                 </th>*@
@@ -114,8 +109,7 @@
 
 @Html.PagedListPager(
 Model,
-page => Url.Action("BookList", new { fromPage = true,sortByName = ViewBag.SortByName, page = page }),
-PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "NameColId" })
+page => Url.Action("BookList", new { fromPage = true,sortByName = ViewBag.SortByName, page = page })
 )
 
 
@@ -133,4 +127,6 @@ PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMe
 
 <script src="~/Scripts/jquery-ui.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>  @*//:((((((((((((*@

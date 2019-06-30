@@ -12,6 +12,7 @@
     <Property Name="ConditionId" Type="Int32" Nullable="false" />
     <Property Name="IsActive" Type="Double" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="BookAuthor" Relationship="Self.FK_Book_BookAuthor" FromRole="Book" ToRole="BookAuthor" />
     <NavigationProperty Name="BookCondition" Relationship="Self.FK_Book_BookCondition" FromRole="Book" ToRole="BookCondition" />
     <NavigationProperty Name="BookGenre" Relationship="Self.FK_Book_BookGenre" FromRole="Book" ToRole="BookGenre" />

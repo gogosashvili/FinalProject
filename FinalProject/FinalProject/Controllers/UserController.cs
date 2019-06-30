@@ -76,7 +76,8 @@ namespace FinalProject.Controllers
                 GenreId = model.GenreId,
                 DealTypeId = model.DealTypeId,
                 IsActive = 1,
-                UserId = LoginHelper.CurrentUser().Id
+                UserId = LoginHelper.CurrentUser().Id,
+                Price = model.Price
             });
             return RedirectToAction("BookList");
         }

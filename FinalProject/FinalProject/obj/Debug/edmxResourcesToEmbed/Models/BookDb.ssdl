@@ -12,6 +12,7 @@
     <Property Name="ConditionId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="float" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="BookAuthor">
     <Key>

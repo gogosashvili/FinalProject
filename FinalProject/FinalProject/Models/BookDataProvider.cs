@@ -40,6 +40,7 @@ namespace FinalProject.Models
             result.DealTypeId = model.DealTypeId;
             result.ConditionId = model.ConditionId;
             result.UserId = model.UserId;
+            result.Price = model.Price;
 
             _db.SaveChanges();
         }

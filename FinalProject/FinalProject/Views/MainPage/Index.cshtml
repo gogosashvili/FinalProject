@@ -3,5 +3,139 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
+
+
+<link href="~/Content/css/main-page-style.css" rel="stylesheet" />
+<link href="~/Content/css/shared-style.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<div class="row">
+    <div class="col-9">
+        <div class="free-books">
+            <div>
+                <h4>გასაჩუქებელი წიგნები</h4>
+            </div>
+            <div class="card-container">
+                <ul>
+                    @for (int i = 0; i < ViewBag.FreeBooks.Count; i++)
+                    {
+                        if (i < 4)
+                        {
+                            <li class="col-3">
+                                <div>
+                                    <div class="card">
+                                        <img class="card-img-top" src='../../img/book.jpg' alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.FreeBooks[i].Name</h5>
+                                            <p class="card-text">@ViewBag.FreeBooks[i].BookAuthor.Name</p>
+                                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                        </div>
+                                    </div>
+                            </li>
+                        }
+                    }
+
+                    <img class="more-icon" src="~/img/more-icon.png" style="width: 40px; display: block; margin: auto; margin-top: 1em;" />
+                </ul>
+            </div>
+        </div>
+
+        <div class="swap-books">
+            <div>
+                <h4>გასაყიდი წიგნები</h4>
+            </div>
+            <div class="card-container">
+                <ul>
+                    @for (int i = 0; i < ViewBag.SwapBoos.Count; i++)
+                    {
+                        if (i < 4)
+                        {
+                            <li class="col-3">
+                                <div>
+                                    <div class="card">
+                                        <img class="card-img-top" src='../../img/book.jpg' alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.SwapBoos[i].Name</h5>
+                                            <p class="card-text">@ViewBag.SwapBoos[i].BookAuthor.Name</p>
+                                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                        </div>
+                                    </div>
+                            </li>
+                        }
+                    }
+
+                    <img class="more-icon" src="~/img/more-icon.png" style="width: 40px; display: block; margin: auto; margin-top: 1em;" />
+                </ul>
+            </div>
+        </div>
+
+        <div class="paid-books">
+            <div>
+                <h4>გასაყიდი წიგნები</h4>
+            </div>
+            <div class="card-container">
+                <ul>
+                    @for (int i = 0; i < ViewBag.PaidBooks.Count; i++)
+                    {
+                        if (i < 4)
+                        {
+                            <li class="col-3">
+                                <div>
+                                    <div class="card">
+                                        <img class="card-img-top" src='../../img/book.jpg' alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.PaidBooks[i].Name</h5>
+                                            <p class="card-text">@ViewBag.PaidBooks[i].BookAuthor.Name</p>
+                                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                        </div>
+                                    </div>
+                            </li>
+                        }
+                    }
+
+                    <img class="more-icon" src="~/img/more-icon.png" style="width: 40px; display: block; margin: auto; margin-top: 1em;" />
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-3">
+        <div class="question-cards">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">კითხვა კითხვა კითხვა კითხვა კითხვა კითხვა</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">კითხვა კითხვა კითხვა კითხვა კითხვა კითხვა</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">კითხვა კითხვა კითხვა კითხვა კითხვა კითხვა</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">კითხვა კითხვა კითხვა კითხვა კითხვა კითხვა</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

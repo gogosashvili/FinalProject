@@ -216,32 +216,24 @@ namespace FinalProject.Controllers
 
 
         #region Book
-        public ActionResult BookList(string name = "", int page = 1)
-        {
-            ViewBag.Name = name;
-            var result = bookdataProvider.GetAllBooks(name).ToList();
+        //public ActionResult BookList(string name = "", int page = 1)
+        //{
+        //    ViewBag.Name = name;
+        //    var result = bookdataProvider.GetAllBooks(name).ToList();
 
-            return View(result.ToPagedList(page, 5));
-        }
+        //    return View(result.ToPagedList(page, 5));
+        //}
 
-        public ActionResult SortByBookName(string sortByName, int page = 1,
+        public ActionResult BookList(string sortByName, int page = 1,
                                            string searchName = "", bool fromPage = false)
         {
             //ViewBag.IsName = true;
 
-            var name = "";
-            if (!fromPage)
-            {
-                name = sortByName == null || sortByName == "orderBy" ? "desc" : "orderBy";
-                ViewBag.SortByName = name;
-            }
-            else
-            {
-                name = sortByName == null || sortByName == "orderBy" ? "orderBy" : "desc";
-            }
+            ViewBag.SortByName = sortByName;
+
 
             var result = bookdataProvider.GetAllBooks("");
-            switch (name)
+            switch (sortByName)
             {
                 case "desc":
                     result = bookdataProvider.GetAllBooks("")
@@ -298,7 +290,8 @@ namespace FinalProject.Controllers
                 GenreId = model.GenreId,
                 DealTypeId = model.DealTypeId,
                 IsActive = 1,
-                UserId = LoginHelper.CurrentUser().Id   //არ მუშაობს :(
+                UserId = LoginHelper.CurrentUser().Id,   //არ მუშაობს :( //მგონი ამუშავდა :დ
+                Price = model.Price
             });
             return RedirectToAction("BookList");
         }
@@ -327,7 +320,8 @@ namespace FinalProject.Controllers
                 GenreId = result.GenreId,
                 DealTypeId = result.DealTypeId,
                 IsActive = result.IsActive,
-                UserId = result.UserId
+                UserId = result.UserId,
+                Price = result.Price
             };
             return View(customBook);
         }

@@ -22,6 +22,7 @@ namespace FinalProject.Models
         public int ConditionId { get; set; }
         public double IsActive { get; set; }
         public int UserId { get; set; }
+        public Nullable<decimal> Price { get; set; }
     
         public virtual BookAuthor BookAuthor { get; set; }
         public virtual BookCondition BookCondition { get; set; }
